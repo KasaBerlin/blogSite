@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pudelgulasch.github.io/blogSite/",
+  "homepage": "https://kasaberlin.github.io/blogSite/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.1",
     "gh-pages": "^2.1.1",
