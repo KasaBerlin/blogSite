@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Sorting from "./Sorting";
+// import Sorting from "./Sorting";
 
 const ShowAllPosts = props => {
   // filterBlog = () => ();
   return (
     <div>
-      <Sorting></Sorting>
+      {/* <Sorting></Sorting> */}
       {Object.keys(props.items)
         .sort((a, b) => a.uuid > b.uuid)
         .map((uuid, i) => {
