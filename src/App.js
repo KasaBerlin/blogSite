@@ -92,7 +92,7 @@ class App extends React.Component {
         </header>
         <div className="content">
           <Switch>
-            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/blogSite" component={Home}></Route>
             <Route
               path="/create"
               render={props => (
