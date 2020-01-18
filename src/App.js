@@ -6,7 +6,7 @@ import Home from "./components/Home";
 import ShowSinglePost from "./components/ShowSinglePost";
 import ShowAllPosts from "./components/ShowAllPosts";
 
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, Redirect } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 class App extends React.Component {
   constructor(props) {
@@ -84,7 +84,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <nav>
-            <Link to="/">Home</Link>
+            <Link to="/blogSite">Home</Link>
             <Link to="/create">Create A Post</Link>
             <Link to="/showallposts">Show Current Post</Link>
             {this.addH2AndSort()}
@@ -92,6 +92,7 @@ class App extends React.Component {
         </header>
         <div className="content">
           <Switch>
+          <Redirect exact from='/' to='/blogSite'/>
             <Route exact path="/blogSite" component={Home}></Route>
             <Route
               path="/create"
