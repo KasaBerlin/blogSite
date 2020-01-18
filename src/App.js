@@ -1,13 +1,13 @@
 import React from "react";
-import "./App.css";
+import { Route, Switch, Link, Redirect, withRouter } from "react-router-dom";
+
 import uuid from "uuid/v4";
 
+import "./App.css";
 import Home from "./components/Home";
 import ShowSinglePost from "./components/ShowSinglePost";
 import ShowAllPosts from "./components/ShowAllPosts";
 
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -79,12 +79,11 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.props.history.location.pathname);
     return (
       <div className="App">
         <header className="App-header">
           <nav>
-            <Link to="/blogSite">Home</Link>
+            <Link to="/">Home</Link>
             <Link to="/create">Create A Post</Link>
             <Link to="/showallposts">Show Current Post</Link>
             {this.addH2AndSort()}
@@ -92,18 +91,18 @@ class App extends React.Component {
         </header>
         <div className="content">
           <Switch>
-          <Redirect exact from='/' to='/blogSite'/>
-            <Route exact path="/blogSite" component={Home}></Route>
+            <Route exact path="/" component={Home}></Route>
             <Route
               path="/create"
               render={props => (
                 <ShowSinglePost addPost={this.addPost} isAuthed={true} />
-              )}
+                )}
             ></Route>
             <Route
               path="/showallposts"
               render={props => this.emptyPostList()}
             ></Route>
+                <Redirect to='/'/>
           </Switch>
         </div>
       </div>
