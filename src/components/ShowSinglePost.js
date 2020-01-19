@@ -6,14 +6,12 @@ const ShowSinglePost = props => {
   const userInput = React.createRef();
   const titleInput = React.createRef();
   const commentInput = React.createRef();
-  // console.log(userInput);
+  
   const handleSubmit = e => {
-    e.preventDefault();
     const user = userInput.current.value.trim();
     const title = titleInput.current.value.trim();
     const comment = commentInput.current.value.trim();
     props.addPost(user, title, comment);
-    e.currentTarget.reset();
 
     props.history.push("/showallposts");
   };

@@ -19,18 +19,6 @@ class App extends React.Component {
           postList: {}
         });
   }
-  componentDidUpdate() {
-    this.savePost(this.storageKey, JSON.stringify(this.state));
-  }
-
-  savePost(key, value) {
-    localStorage.setItem(key, value);
-  }
-
-  getPost = (key, defaultValue = null) => {
-    const value = localStorage.getItem(key);
-    return value != null ? value : defaultValue;
-  };
 
   addPost = (user, title, comment) => {
     const post = {
@@ -38,13 +26,23 @@ class App extends React.Component {
       user: user,
       title: title,
       comment: comment,
-      date: new Date().toLocaleString(),
-      showing: false
+      date: new Date().toLocaleString('en-GB'),
+      showing:false
     };
     this.setState(state => {
       state.postList[post.uuid] = post;
-      return state;
     });
+  };
+  
+// local storage only handles string key/value pairs
+  componentDidUpdate() {
+    //savePost (key,value)
+    localStorage.setItem(this.storageKey, JSON.stringify(this.state));
+  }
+
+  getPost = (key, defaultValue = null) => {
+    const value = localStorage.getItem(key);
+    return value != null ? value : defaultValue;
   };
 
   removePost = uuid => {
@@ -54,29 +52,29 @@ class App extends React.Component {
     });
   };
 
-  addH2AndSort = () =>
-    this.props.history.location.pathname === "/showallposts" ? (
-      <h2 className="hello">Good morning Developers!</h2>
-    ) : null;
-
-  emptyPostList = () =>
-    Object.keys(this.state.postList).length === 0 ? (
-      <h2 className="nopost">No posts yet!</h2>
-    ) : (
-      <ShowAllPosts
-        items={this.state.postList}
-        handleClick={this.handleClick}
-        removePost={this.removePost}
-        isAuthed={true}
-      />
-    );
-
-  handleClick = uuid => {
+  openPost = uuid => {
     this.setState(state => {
       state.postList[uuid].showing = !state.postList[uuid].showing;
       return state;
-    });
-  };
+      });
+    };
+
+  emptyPostList = () =>{
+    return Object.keys(this.state.postList).length === 0 ? (
+      <h2 className="nopost">No posts yet!</h2>
+      ) : (
+        <ShowAllPosts
+        items={this.state.postList}
+        openPost={this.openPost}
+        removePost={this.removePost}
+        isAuthed={true}
+        />
+        )};
+               
+  addWelcome = () =>
+    this.props.history.location.pathname === "/showallposts" ? (
+    <h2 className="hello">Good morning Developers!</h2>
+    ) : null;
 
   render() {
     return (
@@ -86,7 +84,7 @@ class App extends React.Component {
             <Link to="/">Home</Link>
             <Link to="/create">Create A Post</Link>
             <Link to="/showallposts">Show Current Post</Link>
-            {this.addH2AndSort()}
+            {this.addWelcome()}
           </nav>
         </header>
         <div className="content">
@@ -100,6 +98,7 @@ class App extends React.Component {
             ></Route>
             <Route
               path="/showallposts"
+              // function will be called when the location matches
               render={props => this.emptyPostList()}
             ></Route>
                 <Redirect to='/'/>

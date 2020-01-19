@@ -10,7 +10,6 @@ nav {
   margin: 10% 10% 0;
 }
 a {
-  /* display: inline-block; */
   float: left;
   color: #61dafb;
   padding: 10px;
@@ -138,7 +137,6 @@ textarea {
 .remove {
   font-size: medium;
   color: salmon;
-  text-transform: uppercase;
   text-decoration-line: overline;
   background-color: transparent;
   border: none;

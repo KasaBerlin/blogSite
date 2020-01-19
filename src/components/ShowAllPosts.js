@@ -1,25 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import Sorting from "./Sorting";
 
 const ShowAllPosts = props => {
-  // filterBlog = () => ();
   return (
     <div>
-      {/* <Sorting></Sorting> */}
       {Object.keys(props.items)
         .sort((a, b) => a.uuid > b.uuid)
         .map((uuid, i) => {
           uuid = props.items[uuid].uuid;
           return (
-            <div className="post">
+            <div key={i} className="post">
               <p className="title">
                 {" "}
                 <span style={titleStyle}>{props.items[uuid].title}</span>{" "}
               </p>
               <button
                 className="read"
-                onClick={props.handleClick.bind(this, uuid)}
+                onClick={props.openPost.bind(this, uuid)}
               >
                 open...
               </button>
@@ -59,6 +56,7 @@ const usernameStyle = {
   textTransform: "uppercase",
   textDecorationLine: "overline"
 };
+
 const dateStyle = {
   color: "rgba(248, 148, 6, 1)",
   borderLeft: "1px solid tomato",

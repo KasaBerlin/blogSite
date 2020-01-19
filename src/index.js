@@ -8,7 +8,6 @@ import App from "./App";
 import "@fortawesome/fontawesome-free/css/all.css";
 import * as serviceWorker from "./serviceWorker";
 
-
 ReactDOM.render(
 <HashRouter>
 <App />
